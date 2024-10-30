@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration status="INFO">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <loggers>
+        <logger name="org.springframework" level="INFO" additivity="false">
+            <appender-ref ref="console"/>
+        </logger>
+
+        <logger name="org.zerock" level="INFO" additivity="false">
+            <appender-ref ref="console"/>
+        </logger>
+
+        <root level="INFO" additivity="false">
+            <AppenderRef ref="console"/>
+        </root>
+
+    </loggers>
+
+
+
+</configuration>

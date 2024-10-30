@@ -44,11 +44,11 @@
                             <th scope="col">RegDate</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody th:with="link = ${pageRequestDTO.getLink()}">
                         <tr th:each="dto:${responseDTO.dtoList}">
                             <th scope="row">[[${dto.bno}]]</th>
                             <td>
-                                [[${dto.title}]]
+                                <a th:href="|@{/board/read(bno =${dto.bno})}&${link}|">[[${dto.title}]]</a>
                             </td>
                             <td>
                                 [[${dto.writer}]]
@@ -122,7 +122,7 @@
 
         const formObj = document.querySelector("form")
 
-        formObj.innerHTML += `<input type='hidden' name='page' value='${num}>`
+        formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
 
         formObj.submit();
     }, false)

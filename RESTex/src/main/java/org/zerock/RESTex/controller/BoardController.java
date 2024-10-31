@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.restex.domain.Board;
 import org.zerock.restex.dto.BoardDTO;
+import org.zerock.restex.dto.BoardListReplyCountDTO;
 import org.zerock.restex.dto.PageRequestDTO;
 import org.zerock.restex.dto.PageResponseDTO;
 import org.zerock.restex.service.BoardService;
@@ -28,7 +29,7 @@ public class BoardController {
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model) {
 
-        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+        PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
 
         log.info(responseDTO);
 

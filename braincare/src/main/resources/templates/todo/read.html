@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <title>Todo Read</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="row mt-3">
+
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Todo Read
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Todo ID</span>
+                        <input type="text" class="form-control" th:value="${dto.todoId}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Title</span>
+                        <input type="text" class="form-control" th:value="${dto.title}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Description</span>
+                        <textarea class="form-control col-sm-5" rows="5" readonly>[[${dto.description}]]</textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Completed</span>
+                        <input type="checkbox" th:checked="${dto.completed}" disabled>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">DueDate</span>
+                        <input type="text" class="form-control" th:value="${#temporals.format(dto.dueDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
+
+                    <div class="my-4">
+                        <div class="float-end" th:with="link = ${pageRequestDTO.getLink()}">
+                            <a th:href="|@{/todo/list}?${link}|" class="text-decoration-none">
+                                <button class="btn btn-primary " type="button">List</button>
+                            </a>
+                        </div>
+                        <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}|" class="text-decoration-none">
+                            <button class="btn btn-secondary" type="button">Modify</button>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+    console.log('[[${pageRequestDTO.getLink()}]]')
+
+</script>

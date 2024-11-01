@@ -7,4 +7,6 @@ import org.zerock.braincare.todos.domain.Todo;
 public interface TodoSearch {
 
     Page<Todo> search1(Pageable pageable);
+
+    Page<Todo> searchAll(String[] types, String keyword, Pageable pageable);
 }

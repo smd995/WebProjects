@@ -26,7 +26,7 @@ public class TodoRepositoryTests {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
+        IntStream.rangeClosed(1, 300).forEach(i -> {
             Todo todo = Todo.builder()
                     .todoId(i)
                     .title("sample title" + i)
@@ -93,4 +93,42 @@ public class TodoRepositoryTests {
         todoList.forEach(todo -> log.info(todo));
     }
 
+    @Test
+    public void testSearch1() {
+        Pageable pageable = PageRequest.of(0,10, Sort.by("todoId").descending());
+        Page<Todo> todos = todoRepository.search1(pageable);
+    }
+
+    @Test
+    public void testSearchAll(){
+        String[] types = {"t", "d"};
+
+        String keyword = "1";
+
+        Pageable pageable = PageRequest.of(0,10, Sort.by("todoId").descending());
+
+        Page<Todo> result = todoRepository.searchAll(types, keyword, pageable);
+    }
+
+    @Test
+    public void testSearchAll2() {
+
+        String[] types = {"t","d"};
+
+        String keyword = "1";
+
+        Pageable pageable = PageRequest.of(0,10,Sort.by("todoId").descending());
+
+        Page<Todo> result = todoRepository.searchAll(types, keyword, pageable);
+
+        log.info(result.getTotalPages());
+
+        log.info(result.getSize());
+
+        log.info(result.getNumber());
+
+        log.info(result.hasPrevious() + ": " + result.hasNext());
+
+        result.getContent().forEach(todo -> log.info(todo));
+    }
 }

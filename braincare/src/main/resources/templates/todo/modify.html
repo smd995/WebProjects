@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <title>Todo Modify</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="row mt-3">
+
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Todo Modify
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/todo/modify}" method="post" id="f1">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">TodoId</span>
+                            <input type="text" name="todoId" class="form-control" th:value="${dto.todoId}" readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Title</span>
+                            <input type="text" name="title" class="form-control" th:value="${dto.title}">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Description</span>
+                            <textarea class="form-control col-sm-5" rows="5" name="description">[[${dto.description}]]</textarea>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Completed</span>
+                            <input type="text" name="completed" class="form-control" th:value="${dto.completed}" readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">DueDate</span>
+                            <input type="text" class="form-control" th:value="${#temporals.format(dto.dueDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                        </div>
+
+                        <div class="float-end">
+                            <button class="btn btn-primary listBtn" type="submit">List</button>
+                            <button class="btn btn-secondary modifyBtn" type="reset">Modify</button>
+                            <button class="btn btn-danger removeBtn" type="reset">Remove</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    console.log('[[${pageRequestDTO.getLink()}]]')
+
+    const errors = [[${errors}]]
+    console.log(errors)
+
+    let errorMsg = ''
+
+    if(errors) {
+        for(let i = 0; i < errors.length; i++) {
+            errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
+        }
+
+        history.replaceState({}, null, null)
+        alert(errorMsg)
+    }
+
+    const link = [[${pageRequestDTO.getLink()}]]
+    const formObj = document.querySelector("#f1")
+
+    document.querySelector(".modifyBtn").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/todo/modify?${link}`
+        formObj.method = 'post'
+        formObj.submit()
+    },false)
+
+    document.querySelector(".removeBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/todo/remove`
+        formObj.method = 'post'
+        formObj.submit()
+    },false)
+
+    document.querySelector(".listBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.reset()
+        self.location = `/todo/list?${link}`
+    },false)
+</script>

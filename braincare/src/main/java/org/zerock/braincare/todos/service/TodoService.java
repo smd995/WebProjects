@@ -1,16 +1,20 @@
 package org.zerock.braincare.todos.service;
 
 
+import org.zerock.braincare.todos.dto.PageRequestDTO;
+import org.zerock.braincare.todos.dto.PageResponseDTO;
 import org.zerock.braincare.todos.dto.TodoDTO;
 
 public interface TodoService {
 
-    int register(TodoDTO todoDTO);
+    Long register(TodoDTO todoDTO);
 
-    TodoDTO readOne(int todo_id);
+    TodoDTO readOne(Long todo_id);
 
     void modify(TodoDTO todoDTO);
 
-    void remove(int todo_id);
+    void remove(Long todo_id);
+
+    PageResponseDTO<TodoDTO> list(PageRequestDTO pageRequestDTO);
 
 }

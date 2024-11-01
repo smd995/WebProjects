@@ -27,7 +27,7 @@ public class QTodo extends EntityPathBase<Todo> {
 
     public final StringPath title = createString("title");
 
-    public final NumberPath<Integer> todoId = createNumber("todoId", Integer.class);
+    public final NumberPath<Long> todoId = createNumber("todoId", Long.class);
 
     public QTodo(String variable) {
         super(Todo.class, forVariable(variable));

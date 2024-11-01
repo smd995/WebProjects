@@ -4,6 +4,8 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.zerock.braincare.todos.dto.PageRequestDTO;
+import org.zerock.braincare.todos.dto.PageResponseDTO;
 import org.zerock.braincare.todos.dto.TodoDTO;
 import org.zerock.braincare.todos.service.TodoService;
 
@@ -27,14 +29,14 @@ public class TodoServiceTests {
                 .dueDate(LocalDateTime.parse("2024-12-31T00:00:00"))
                 .build();
 
-        int todo_id = todoService.register(todoDTO);
+        Long todo_id = todoService.register(todoDTO);
 
         log.info("todo_id: " + todo_id);
     }
 
     @Test
     public void testRead() {
-        TodoDTO todoDTO = todoService.readOne(100);
+        TodoDTO todoDTO = todoService.readOne(100L);
 
         log.info("todoDTO: " + todoDTO);
     }
@@ -42,7 +44,7 @@ public class TodoServiceTests {
     @Test
     public void testModify() {
         TodoDTO todoDTO = TodoDTO.builder()
-                .todo_id(101)
+                .todoId(101)
                 .title("Update Title")
                 .description("Update Description")
                 .completed(true)
@@ -55,7 +57,22 @@ public class TodoServiceTests {
 
     @Test
     public void testDelete() {
-        todoService.remove(101);
+        todoService.remove(101L);
+    }
+
+    @Test
+    public void testList() {
+
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .type("td")
+                .keyword("1")
+                .page(1)
+                .size(10)
+                .build();
+
+        PageResponseDTO<TodoDTO> pageResponseDTO = todoService.list(pageRequestDTO);
+
+        log.info(pageResponseDTO);
     }
 
 }

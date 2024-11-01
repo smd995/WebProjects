@@ -1,5 +1,8 @@
 package org.zerock.braincare.todos.dto;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,15 +15,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TodoDTO {
-    private int todo_id;
+    private Long todoId;
 
-    private int member_id;
-
+    @NotEmpty
+    @Size(min = 3, max = 100)
     private String title;
 
+    @NotEmpty
     private String description;
 
     private boolean completed;
 
+    @Future
     private LocalDateTime dueDate;
 }

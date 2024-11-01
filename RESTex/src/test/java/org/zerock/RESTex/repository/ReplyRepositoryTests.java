@@ -12,10 +12,6 @@ import org.zerock.restex.domain.Board;
 import org.zerock.restex.domain.Reply;
 import org.zerock.restex.dto.BoardListReplyCountDTO;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.IntStream;
-
 @SpringBootTest
 @Log4j2
 public class ReplyRepositoryTests {

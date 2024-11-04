@@ -1,4 +1,4 @@
-package org.zerock.restex.domain;
+package org.zerock.boardex_1.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -10,9 +10,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter
-@EntityListeners(AuditingEntityListener.class)
 abstract class BaseEntity {
 
     @CreatedDate
@@ -21,5 +21,5 @@ abstract class BaseEntity {
 
     @LastModifiedDate
     @Column(name = "moddate")
-    private LocalDateTime moddate;
+    private LocalDateTime modDate;
 }

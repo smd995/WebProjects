@@ -1,4 +1,4 @@
-package org.zerock.restex.domain;
+package org.zerock.boardex_1.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

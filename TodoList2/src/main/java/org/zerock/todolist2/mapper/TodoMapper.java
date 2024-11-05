@@ -23,6 +23,9 @@ public interface TodoMapper {
 
     List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
 
+    List<TodoVO> findByWriterWithPaging(PageRequestDTO pageRequestDTO);
+
     int getCount(PageRequestDTO pageRequestDTO);
+
 
 }

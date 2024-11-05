@@ -41,7 +41,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
 
-        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        List<TodoVO> voList = todoMapper.findByWriterWithPaging(pageRequestDTO);
         List<TodoDTO> dtoList = voList.stream()
                 .map(todoVO -> modelMapper.map(todoVO, TodoDTO.class))
                 .collect(Collectors.toList());

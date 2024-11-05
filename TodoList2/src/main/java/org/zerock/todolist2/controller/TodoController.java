@@ -13,6 +13,7 @@ import org.zerock.todolist2.dto.PageRequestDTO;
 import org.zerock.todolist2.dto.TodoDTO;
 import org.zerock.todolist2.service.TodoService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Log4j2
@@ -24,9 +25,18 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("/list")
-    public void list(@Valid PageRequestDTO pageRequestDTO,
+    public String list(
+            HttpSession session,
+            @Valid PageRequestDTO pageRequestDTO,
                      BindingResult bindingResult,
                      Model model) {
+        log.info(session.getAttribute("loginUser"));
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/member/login";
+        }
+        String userId = session.getAttribute("loginUser").toString();
+
+        pageRequestDTO.setWriter(userId);
 
         log.info(pageRequestDTO);
 
@@ -34,6 +44,8 @@ public class TodoController {
             pageRequestDTO = PageRequestDTO.builder().build();
         }
         model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
+
+        return "/todo/list";
     }
 
     @GetMapping("/register")

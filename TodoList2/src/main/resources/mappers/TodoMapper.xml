@@ -62,16 +62,16 @@
         order by tno desc limit #{skip}, #{size}
     </select>
 
-    <select id="findByWriterWithPaging" resultType="org.zerock.todolist2.dto.TodoDTO" parameterType="map">
-        SELECT * FROM todo
-        WHERE writer = #{writer}
-        ORDER BY tno DESC
-            LIMIT #{pageRequestDTO.skip}, #{pageRequestDTO.size}
-    </select>
-
-
     <select id="getCount" resultType="int">
         select count(tno) from todo
         <include refid="search"></include>
     </select>
+
+    <select id="findByWriterWithPaging" resultType="org.zerock.todolist2.domain.TodoVO">
+        SELECT * FROM todo
+        WHERE writer = #{writer}
+        ORDER BY tno DESC
+        LIMIT #{skip}, #{size} <!-- 필요 시 offset과 size 처리 -->
+    </select>
+
 </mapper>

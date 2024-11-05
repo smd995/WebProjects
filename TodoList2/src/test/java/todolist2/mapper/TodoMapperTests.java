@@ -84,14 +84,4 @@ public class TodoMapperTests {
         log.info(mapper.getCount(pageRequestDTO));
     }
 
-    @Test
-    public void testSelectUserList() {
-        String id = "user01";
-        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .page(1)
-                .size(10)
-                .build();
-        PageResponseDTO<TodoDTO> byWriterWithPaging = mapper.findByWriterWithPaging(id, pageRequestDTO);
-        log.info(byWriterWithPaging);
-    }
 }

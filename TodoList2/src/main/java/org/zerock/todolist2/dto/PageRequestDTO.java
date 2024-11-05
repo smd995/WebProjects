@@ -42,6 +42,8 @@ public class PageRequestDTO {
 
     private LocalDate to;
 
+    private String writer;
+
     public int getSkip() {
         return (page - 1) * size;
     }

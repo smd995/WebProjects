@@ -25,9 +25,9 @@ public class UserServiceTests {
     @Test
     public void testRegister() {
         UserDTO userDTO = UserDTO.builder()
-                .id("user12")
-                .pw("password12")
-                .email1("user12")
+                .id("user13")
+                .pw("password13")
+                .email1("user13")
                 .email2("example.com")
                 .regDate(LocalDate.now())
                 .build();
@@ -36,9 +36,4 @@ public class UserServiceTests {
         userService.register(userDTO);
     }
 
-//    @Test
-//    public void testGetOne() {
-//        UserDTO user12 = userService.getOne("user12", "password12");
-//        log.info(user12);
-//    }
 }

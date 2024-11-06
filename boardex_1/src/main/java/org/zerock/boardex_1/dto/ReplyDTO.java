@@ -1,5 +1,7 @@
 package org.zerock.boardex_1.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -20,11 +22,15 @@ public class ReplyDTO {
     @NotNull
     private Long bno;
 
-    @NotNull
+    @NotEmpty
     private String replyText;
 
     @NotEmpty
     private String replyer;
 
-    private LocalDateTime regDate, modDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime regDate;
+
+    @JsonIgnore
+    private LocalDateTime modDate;
 }
